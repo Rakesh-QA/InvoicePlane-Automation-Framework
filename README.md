@@ -20,4 +20,4 @@
 
 ## How to Run
 1. Clone repository
-2. Run `LoginTest.java`
+2. Run `InvoicePaymentFlowTest.java`
