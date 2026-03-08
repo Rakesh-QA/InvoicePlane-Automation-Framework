@@ -44,22 +44,47 @@ public class ClientPage {
 
         String dynamicClientName = "Client_" + UUID.randomUUID().toString().substring(0,5);
 
+        // Open Clients menu
+        WaitUtils.waitForPresence(driver, clientsMenu);
+        WaitUtils.waitForClickable(driver, clientsMenu);
         driver.findElement(clientsMenu).click();
+
+        // Click Add Client
+        WaitUtils.waitForClickable(driver, addClientBtn);
         driver.findElement(addClientBtn).click();
 
-        // Fill Mandatory Details
+        // Fill Client Name
+        WaitUtils.waitForVisibility(driver, clientNameField);
         driver.findElement(clientNameField).sendKeys(dynamicClientName);
+
+        // Fill Address
+        WaitUtils.waitForVisibility(driver, addressField);
         driver.findElement(addressField).sendKeys("Saibaba colony");
+
+        // Fill City
+        WaitUtils.waitForVisibility(driver, cityField);
         driver.findElement(cityField).sendKeys("Coimbatore");
+
+        // Fill State
+        WaitUtils.waitForVisibility(driver, stateField);
         driver.findElement(stateField).sendKeys("Tamil Nadu");
 
-        // Country Selection (Select2 handling)
+        // Select Country
+        WaitUtils.waitForClickable(driver, countryDropdown);
         driver.findElement(countryDropdown).click();
+
+        WaitUtils.waitForVisibility(driver, countrySearch);
         driver.findElement(countrySearch).sendKeys("India");
+
+        WaitUtils.waitForClickable(driver, selectIndia);
         driver.findElement(selectIndia).click();
 
+        // Contact Number
+        WaitUtils.waitForVisibility(driver, contactField);
         driver.findElement(contactField).sendKeys("9234123423");
 
+        // Save Client
+        WaitUtils.waitForClickable(driver, saveBtn);
         driver.findElement(saveBtn).click();
 
         return dynamicClientName;
@@ -69,7 +94,10 @@ public class ClientPage {
 
     public void verifyClientCreated(String clientName) {
 
+        WaitUtils.waitForClickable(driver, clientsMenu);
         driver.findElement(clientsMenu).click();
+
+        WaitUtils.waitForPresence(driver, clientTableRows);
 
         List<WebElement> rows = driver.findElements(clientTableRows);
 
