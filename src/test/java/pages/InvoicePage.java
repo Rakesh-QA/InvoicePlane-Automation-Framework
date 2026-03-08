@@ -305,13 +305,19 @@ public class InvoicePage {
     
     public double getInvoiceTotal() {
 
-    	String totalText = driver.findElement(invoiceTotal)
-    	        .getText()
-    	        .replace("$", "")
-    	        .replace(" ", "")
-    	        .replace(",", ".")
-    	        .trim();
+    	String text = driver.findElement(invoiceTotal)
+                .getText()
+                .replaceAll("[^0-9,\\.]", "")
+                .replace(" ", "")
+                .replace(",", ".")
+                .trim();
 
-    	return Double.parseDouble(totalText);
+        if(text.isEmpty()) {
+            text = "0";
+        }
+
+    	return Double.parseDouble(text);
     }
+    
+    
 }
